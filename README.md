@@ -321,9 +321,9 @@ If you use this work, please cite:
 ## 📧 Contact
 
 **Group Members:**
-- Student 1 - Roll No. XXX - email@example.com
-- Student 2 - Roll No. XXX - email@example.com
-- Student 3 - Roll No. XXX - email@example.com
+- Kaustubh Patnaik - Roll No. 16014223044 - kaaustubh.patnaik@somaiya.edu
+- Krutarth Ashar - Roll No. 16014223044 - krutarth.a@somaiya.edu
+
 
 **Project Repository:** [GitHub Link]
 
@@ -346,3 +346,4 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 **Last Updated:** January 2025  
 **Version:** 1.0.0
+
