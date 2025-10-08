@@ -338,20 +338,28 @@ def engineer_features_pipeline(train_df, val_df, test_df):
 if __name__ == "__main__":
     # Example usage
     print("Loading data...")
-    train_df = pd.read_csv('data/processed/train.csv')
-    val_df = pd.read_csv('data/processed/val.csv')
-    test_df = pd.read_csv('data/processed/test.csv')
-    
+
+    # Define file paths
+    train_path = r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\train.csv"
+    val_path = r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\val.csv"
+    test_path = r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\test.csv"
+
+    # Load datasets
+    train_df = pd.read_csv(train_path)
+    val_df = pd.read_csv(val_path)
+    test_df = pd.read_csv(test_path)
+
     # Engineer features
     train_df, val_df, test_df, engineer = engineer_features_pipeline(
         train_df, val_df, test_df
     )
-    
+
     # Save engineered data
     print("\nSaving engineered datasets...")
-    train_df.to_csv('data/processed/train_engineered.csv', index=False)
-    val_df.to_csv('data/processed/val_engineered.csv', index=False)
-    test_df.to_csv('data/processed/test_engineered.csv', index=False)
-    
+    train_df.to_csv(r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\train_engineered.csv", index=False)
+    val_df.to_csv(r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\val_engineered.csv", index=False)
+    test_df.to_csv(r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\test_engineered.csv", index=False)
+
     print("\n✓ Feature engineering complete!")
     print(f"Final feature count: {len(train_df.columns)}")
+

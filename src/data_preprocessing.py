@@ -319,9 +319,9 @@ def preprocess_full_pipeline(train_path, val_path, test_path):
 if __name__ == "__main__":
     # Example usage
     X_train, X_val, X_test, y_train, y_val, y_test, preprocessor = preprocess_full_pipeline(
-        'data/processed/train.csv',
-        'data/processed/val.csv',
-        'data/processed/test.csv'
+        r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\train.csv",
+        r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\val.csv",
+        r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\test.csv"
     )
     
     print(f"\nFinal shapes:")

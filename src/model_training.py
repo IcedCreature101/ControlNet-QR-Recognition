@@ -274,43 +274,60 @@ class QRScannabilityPredictor:
         print(results_df.to_string(index=False))
         
         # Save results
-        os.makedirs('results/metrics', exist_ok=True)
-        results_df.to_csv('results/metrics/model_comparison.csv', index=False)
+        os.makedirs('./outputs/results/metrics', exist_ok=True)
+        results_df.to_csv('./outputs/results/metrics/model_comparison.csv', index=False)
+
         
         print(f"\n✓ Results saved to results/metrics/model_comparison.csv")
         
         return results_df
         
     def save_best_model(self):
-        """Save the best performing model"""
-        
-        # Find best model based on F1-score on test set
-        best_score = 0
-        best_model_name = None
-        
-        for name, model in self.models.items():
-            y_pred = model.predict(self.X_test)
-            f1 = f1_score(self.y_test, y_pred)
-            
-            if f1 > best_score:
-                best_score = f1
-                best_model_name = name
-        
-        # Save best model
-        os.makedirs('models/trained_models', exist_ok=True)
-        
-        best_model = self.models[best_model_name]
-        joblib.dump(best_model, 'models/trained_models/best_model.pkl')
-        joblib.dump(self.scaler, 'models/trained_models/scaler.pkl')
-        joblib.dump(self.label_encoders, 'models/trained_models/label_encoders.pkl')
-        joblib.dump(self.feature_names, 'models/trained_models/feature_names.pkl')
-        
-        print(f"\n{'='*80}")
-        print(f"Best Model: {best_model_name} (F1-Score: {best_score:.4f})")
-        print(f"✓ Saved to models/trained_models/best_model.pkl")
-        print(f"{'='*80}")
-        
-        return best_model_name, best_model
+        """
+        Save the best-performing model based on ROC-AUC score
+        """
+        print("\nSaving best model...")
+
+        # Ensure comparison results exist
+        results_path = "./outputs/results/metrics/model_comparison.csv"
+        if not os.path.exists(results_path):
+            print("✗ No comparison results found.")
+            return None, None
+
+        # Load results
+        results_df = pd.read_csv(results_path)
+
+        if results_df.empty:
+            print("✗ Model comparison file is empty.")
+            return None, None
+
+        # Select best model
+        best_row = results_df.loc[results_df["ROC-AUC"].idxmax()]
+        best_name = best_row["Model"]
+
+        # Retrieve model object from trained models dict
+        best_model = self.models.get(best_name)
+
+        if best_model is None:
+            print(f"✗ No trained model found for '{best_name}'.")
+            return None, None
+
+        # Safe output path
+        model_dir = os.path.join("outputs", "models", "trained_models")
+        os.makedirs(model_dir, exist_ok=True)
+
+        # Save model
+        save_path = os.path.join(model_dir, "best_model.pkl")
+        joblib.dump(best_model, save_path)
+
+        # Also save preprocessors
+        joblib.dump(self.scaler, os.path.join(model_dir, "scaler.pkl"))
+        joblib.dump(self.label_encoders, os.path.join(model_dir, "label_encoders.pkl"))
+        joblib.dump(self.feature_names, os.path.join(model_dir, "feature_names.pkl"))
+
+        print(f"✓ Best model ({best_name}) saved to: {save_path}")
+        return best_name, best_model
+
 
 
 def predict_scannability(params_dict):
@@ -374,9 +391,10 @@ if __name__ == "__main__":
     
     # Load data
     predictor.load_data(
-        'data/processed/train.csv',
-        'data/processed/val.csv',
-        'data/processed/test.csv'
+        r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\train.csv",
+    r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\val.csv",
+    r"C:\Users\kauzp\Downloads\TYBTECHML_Group[X]_ControlNet_QR_Education\data\processed\test.csv"
+
     )
     
     # Preprocess
