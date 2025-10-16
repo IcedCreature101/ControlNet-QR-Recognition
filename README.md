@@ -45,8 +45,7 @@ While the original paper focuses on using ControlNet for teaching ML concepts th
 - Validated using PyZBar, OpenCV, and ZXing libraries
 
 ### Our Dataset
-**Source:** Custom synthetic dataset + Kaggle QR Code Dataset  
-**Link:** [Kaggle QR Code Dataset](https://www.kaggle.com/datasets/your-dataset-link)
+**Source:** Custom synthetic dataset  
 
 **Features:**
 - `strength`: Control image influence (0.0-1.0)
@@ -72,10 +71,9 @@ While the original paper focuses on using ControlNet for teaching ML concepts th
 
 ### Phase 1: Data Collection & Preprocessing
 1. Generate synthetic data based on paper's parameter ranges
-2. Download supplementary Kaggle dataset
-3. Merge and clean datasets
-4. Handle missing values
-5. Feature scaling and encoding
+2. Merge and clean dataset
+3. Handle missing values
+4. Feature scaling and encoding
 
 ### Phase 2: Exploratory Data Analysis
 1. Distribution analysis of generation parameters
@@ -346,4 +344,5 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 **Last Updated:** January 2025  
 **Version:** 1.0.0
+
 
